@@ -45,10 +45,14 @@ h1 {
     color: #8bd3ff;
 }
 
-.tela-inicial p {
-    line-height: 1.8;
-    text-align: justify;
-    margin-bottom: 25px;
+.tela-inicial {
+    display: block;
+}
+
+.caixa-perguntas,
+.caixa-alternativas,
+.caixa-resultado {
+    display: none;
 }
 
 button {
