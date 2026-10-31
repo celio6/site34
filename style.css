@@ -7,19 +7,16 @@
 
 body {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     padding: 20px;
 
     font-family: Arial, sans-serif;
 
-    background: linear-gradient(
-        135deg,
-        #10172a,
-        #243b63,
-        #38245c
-    );
+    background: linear-gradient(135deg, #10172a, #243b63, #38245c);
 
     color: white;
 }
@@ -30,88 +27,82 @@ body {
 
     padding: 35px;
 
-    background: rgba(255, 255, 255, 0.10);
-
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: #1d2942;
 
     border-radius: 20px;
 
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
 }
 
 h1 {
     text-align: center;
+    color: #75caff;
     margin-bottom: 30px;
-    color: #8bd3ff;
 }
 
 .tela-inicial {
     display: block;
 }
 
-.caixa-perguntas,
-.caixa-alternativas,
-.caixa-resultado {
-    display: none;
+.tela-inicial p {
+    font-size: 17px;
+    line-height: 1.8;
+    text-align: justify;
+    margin-bottom: 25px;
 }
 
 button {
     display: block;
 
     width: 100%;
-    padding: 15px;
 
-    margin-top: 15px;
+    padding: 16px;
+
+    background: #1678e8;
+
+    color: white;
 
     border: none;
     border-radius: 10px;
 
-    background: #3688ed;
-    color: white;
-
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
 
     cursor: pointer;
-
-    transition: 0.3s;
 }
 
 button:hover {
-    background: #1764c4;
-    transform: scale(1.02);
+    background: #075bb8;
 }
 
-.caixa-perguntas {
-    font-size: 22px;
+.tela-jogo {
+    display: none;
+}
+
+#pergunta {
+    font-size: 21px;
     font-weight: bold;
     line-height: 1.5;
-
     margin-bottom: 20px;
 }
 
-.caixa-alternativas button {
+#alternativas button {
+    margin-bottom: 12px;
     text-align: left;
 }
 
-.caixa-resultado {
-    line-height: 1.8;
-    font-size: 18px;
-}
-
-.texto-resultado {
-    white-space: pre-line;
-}
-
-.mostrar {
-    display: block;
-}
-
-.tela-inicial,
-.caixa-perguntas,
-.caixa-alternativas,
-.caixa-resultado {
+.tela-resultado {
     display: none;
+}
+
+.tela-resultado h2 {
+    color: #75caff;
+    margin-bottom: 20px;
+}
+
+.tela-resultado p {
+    line-height: 1.8;
+    margin-bottom: 20px;
 }
 
 @media (max-width: 600px) {
@@ -124,8 +115,8 @@ button:hover {
         font-size: 24px;
     }
 
-    .caixa-perguntas {
-        font-size: 19px;
+    #pergunta {
+        font-size: 18px;
     }
 
 }

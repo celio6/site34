@@ -1,94 +1,72 @@
 
-const botaoIniciar = document.querySelector(".iniciar-btn");
+const telaInicial = document.getElementById("telaInicial");
+const telaJogo = document.getElementById("telaJogo");
+const telaResultado = document.getElementById("telaResultado");
 
-botaoIniciar.addEventListener("click", iniciaJogo);
-const telaInicial = document.querySelector(".tela-inicial");
+const botaoIniciar = document.getElementById("botaoIniciar");
+const botaoNovamente = document.getElementById("botaoNovamente");
 
-const caixaPerguntas = document.querySelector(".caixa-perguntas");
-const caixaAlternativas = document.querySelector(".caixa-alternativas");
-const caixaResultado = document.querySelector(".caixa-resultado");
-
-const textoResultado = document.querySelector(".texto-resultado");
-const botaoNovamente = document.querySelector(".novamente-btn");
+const perguntaHTML = document.getElementById("pergunta");
+const alternativasHTML = document.getElementById("alternativas");
+const resultadoHTML = document.getElementById("resultado");
 
 let atual = 0;
 let historiaFinal = "";
 
-// PERGUNTAS DO JOGO
-
 const perguntas = [
 
     {
-        pergunta: "Você descobriu que uma inteligência artificial consegue tomar decisões importantes. O que você faria?",
+        pergunta: "Como você acredita que a inteligência artificial deve ser utilizada?",
 
         alternativas: [
             {
-                texto: "Permitiria que ela tomasse todas as decisões.",
-                historia: "A humanidade passou a confiar completamente nas inteligências artificiais."
+                texto: "Para ajudar os seres humanos.",
+                historia: "A humanidade utilizou a inteligência artificial como uma ferramenta para melhorar a vida das pessoas."
             },
             {
-                texto: "Permitiria que ela ajudasse, mas com supervisão humana.",
-                historia: "Os humanos decidiram trabalhar junto com as máquinas, mantendo o controle das decisões."
+                texto: "Para substituir os seres humanos.",
+                historia: "As máquinas passaram a realizar diversas atividades que antes eram feitas pelas pessoas."
             },
             {
-                texto: "Proibiria a IA de tomar decisões importantes.",
-                historia: "A humanidade decidiu limitar o poder das inteligências artificiais."
+                texto: "Com limites e supervisão.",
+                historia: "A humanidade estabeleceu regras para garantir que a tecnologia fosse utilizada com responsabilidade."
             }
         ]
     },
 
     {
-        pergunta: "Uma IA consegue substituir várias profissões. Qual seria sua atitude?",
+        pergunta: "O que fazer quando uma IA apresenta informações falsas?",
 
         alternativas: [
             {
-                texto: "Apoiar a substituição dos trabalhadores.",
-                historia: "As empresas automatizaram grande parte das atividades profissionais."
+                texto: "Confiar na inteligência artificial.",
+                historia: "Muitas pessoas passaram a confiar nas respostas das máquinas sem verificar as informações."
             },
             {
-                texto: "Criar novas oportunidades de trabalho.",
-                historia: "A sociedade investiu em educação e novas profissões relacionadas à tecnologia."
+                texto: "Verificar as informações.",
+                historia: "A sociedade desenvolveu o hábito de verificar as informações antes de compartilhá-las."
             },
             {
-                texto: "Impedir que a IA substitua os seres humanos.",
-                historia: "Governos criaram regras para proteger os trabalhadores."
+                texto: "Limitar o acesso à tecnologia.",
+                historia: "Foram criadas regras para controlar o uso da inteligência artificial."
             }
         ]
     },
 
     {
-        pergunta: "Uma inteligência artificial começa a produzir notícias falsas. O que fazer?",
+        pergunta: "Como será o futuro da humanidade com a inteligência artificial?",
 
         alternativas: [
             {
-                texto: "Deixar a tecnologia funcionar livremente.",
-                historia: "A liberdade tecnológica aumentou, mas também cresceram os desafios relacionados à desinformação."
+                texto: "Um futuro dominado pelas máquinas.",
+                historia: "As máquinas conquistaram cada vez mais espaço nas decisões da sociedade."
             },
             {
-                texto: "Criar mecanismos de verificação.",
-                historia: "Sistemas de verificação foram desenvolvidos para identificar conteúdos falsos."
+                texto: "Um futuro de colaboração.",
+                historia: "Humanos e máquinas aprenderam a trabalhar juntos e construir um futuro melhor."
             },
             {
-                texto: "Restringir a criação de conteúdos por IA.",
-                historia: "Novas regras limitaram a produção automatizada de informações."
-            }
-        ]
-    },
-
-    {
-        pergunta: "Como você imagina a relação entre humanos e máquinas no futuro?",
-
-        alternativas: [
-            {
-                texto: "As máquinas serão superiores aos humanos.",
-                historia: "As máquinas assumiram um papel cada vez mais importante na sociedade."
-            },
-            {
-                texto: "Humanos e máquinas trabalharão juntos.",
-                historia: "A colaboração entre humanos e máquinas criou novas possibilidades para a humanidade."
-            },
-            {
-                texto: "Os humanos continuarão controlando toda a tecnologia.",
+                texto: "Um futuro controlado pelos humanos.",
                 historia: "A humanidade decidiu manter o controle sobre o desenvolvimento tecnológico."
             }
         ]
@@ -96,11 +74,9 @@ const perguntas = [
 
 ];
 
-// EVENTO DO BOTÃO INICIAR
+// BOTÃO INICIAR
 
 botaoIniciar.addEventListener("click", iniciaJogo);
-
-// FUNÇÃO PARA INICIAR O JOGO
 
 function iniciaJogo() {
 
@@ -108,16 +84,14 @@ function iniciaJogo() {
     historiaFinal = "";
 
     telaInicial.style.display = "none";
-
-    caixaPerguntas.classList.remove("mostrar");
-    caixaAlternativas.classList.remove("mostrar");
-    caixaResultado.classList.remove("mostrar");
+    telaResultado.style.display = "none";
+    telaJogo.style.display = "block";
 
     mostraPergunta();
 
 }
 
-// FUNÇÃO PARA MOSTRAR AS PERGUNTAS
+// MOSTRAR PERGUNTAS
 
 function mostraPergunta() {
 
@@ -126,70 +100,53 @@ function mostraPergunta() {
         return;
     }
 
-    caixaPerguntas.textContent = perguntas[atual].pergunta;
+    perguntaHTML.textContent = perguntas[atual].pergunta;
 
-    caixaAlternativas.innerHTML = "";
+    alternativasHTML.innerHTML = "";
 
-    caixaPerguntas.classList.add("mostrar");
-    caixaAlternativas.classList.add("mostrar");
-
-    perguntas[atual].alternativas.forEach((alternativa) => {
+    perguntas[atual].alternativas.forEach(function(alternativa) {
 
         const botao = document.createElement("button");
 
         botao.textContent = alternativa.texto;
 
-        botao.addEventListener("click", () => {
-            respostaSelecionada(alternativa);
+        botao.addEventListener("click", function() {
+
+            historiaFinal += alternativa.historia + "\n\n";
+
+            atual++;
+
+            mostraPergunta();
+
         });
 
-        caixaAlternativas.appendChild(botao);
+        alternativasHTML.appendChild(botao);
 
     });
 
 }
 
-// FUNÇÃO PARA REGISTRAR A RESPOSTA
-
-function respostaSelecionada(opcao) {
-
-    historiaFinal += opcao.historia + "\n\n";
-
-    atual++;
-
-    mostraPergunta();
-
-}
-
-// FUNÇÃO PARA MOSTRAR O RESULTADO
+// MOSTRAR RESULTADO
 
 function mostraResultado() {
 
-    caixaPerguntas.classList.remove("mostrar");
-    caixaAlternativas.classList.remove("mostrar");
+    telaJogo.style.display = "none";
+    telaResultado.style.display = "block";
 
-    textoResultado.textContent =
-        "O FUTURO DA HUMANIDADE\n\n" +
+    resultadoHTML.textContent =
         historiaFinal +
-        "O futuro da Inteligência Artificial depende das escolhas que fazemos hoje. Sua missão chegou ao fim!";
-
-    caixaResultado.classList.add("mostrar");
+        "Sua missão chegou ao fim! O futuro da inteligência artificial também depende das escolhas que fazemos hoje.";
 
 }
 
-// EVENTO PARA JOGAR NOVAMENTE
+// JOGAR NOVAMENTE
 
-botaoNovamente.addEventListener("click", jogarNovamente);
+botaoNovamente.addEventListener("click", function() {
 
-// FUNÇÃO PARA REINICIAR O JOGO
-
-function jogarNovamente() {
+    telaResultado.style.display = "none";
+    telaInicial.style.display = "block";
 
     atual = 0;
     historiaFinal = "";
 
-    caixaResultado.classList.remove("mostrar");
-
-    mostraPergunta();
-
-}
+});
