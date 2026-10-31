@@ -1,5 +1,7 @@
 
 const botaoIniciar = document.querySelector(".iniciar-btn");
+
+botaoIniciar.addEventListener("click", iniciaJogo);
 const telaInicial = document.querySelector(".tela-inicial");
 
 const caixaPerguntas = document.querySelector(".caixa-perguntas");
